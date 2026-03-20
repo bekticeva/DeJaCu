@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import SignUpForm from "./components/Login.jsx"
 import HomePage from './components/Home.jsx'
+import Tutorial3 from './tutorials/tutorial3.jsx'
 
 
 function App() {

@@ -6,6 +6,7 @@ import ProfilePage from "./components/Profile";
 import SignUpForm from "./components/Login";
 import NavBar from "./components/NavBar";
 import { useState } from "react";
+import Tutorial3 from "./tutorials/tutorial3";
 
 export default function AppRouter() {
   const [user, setUser] = useState({ name: "", isAuth: false });
@@ -28,12 +29,14 @@ export default function AppRouter() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/login" element={<SignUpForm />} />
+          <Route path="/tutorial3" element={<Tutorial3 />} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
         </Routes>
         
       </AuthContext.Provider>
 
       <div>FOOTER</div>
+      
     </BrowserRouter>
   );
 }

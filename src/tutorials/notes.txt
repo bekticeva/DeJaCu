@@ -1,0 +1,75 @@
+strict mode - renders the components twice for testing purposes
+
+side effect - something that happens because a state changed (
+    code to be exxecuted on the rendering of the components
+)
+    stages: 
+    Mounting (when it first shows up on the screen) -> 
+    Updating (components updates to show the new state)-> 
+    Unmounting
+
+    useEffect(() => {
+    }) 
+
+    allows us to run code specifically at the different stages
+    
+    mounting:
+    useEffect(() => {
+        console.log("Component Mounted");;
+    }, []) 
+
+    mounting:
+    useEffect(() => {
+        console.log("Component Updating");;
+    }, [count]) 
+        whenever this state changes the code will execute
+
+    useEffect(() => {
+        console.log("Component Updating");;
+    })
+        whenever any state changes it will execute
+
+    unmounting:
+    useEffect(() => {
+        console.log("Component Mounted");;
+        return() => {console.log("Component Unmounted");};
+    }, []); 
+
+
+
+    to use event listeners in react
+
+    function CleanupExample(){
+        const [x,setX] = useState(0);
+
+        useEffect (()=>{
+            function handleMove(e) {
+                setX(e.clientX);
+            }
+            window.addEventListener("mousemove", handleMove);
+
+            //cleanup runs on unmount or dependency changed
+            //if you dont clean up you risk memory leaks
+            return () => {
+                window.removeEventListener("mousemove", handleMove)
+            };
+        }, []); //subscribe once
+        return <p>Mouse X: </p>;
+    }
+
+
+    //fetching api oldschool
+    //causes double fetching in production (strict mode)
+    //causes race conditiions, unecessary rerendering
+    //its not the use for useEffect
+
+    useEffect(() => {
+        async function fetchUsers(){
+            try{
+                const response = await fetch("");
+                const data = await response.json();
+                console.log(data);
+            } catch (err) {}
+        }
+        fetchUsers()
+    }, []);
